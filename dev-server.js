@@ -12,7 +12,6 @@ import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
 
-
 const env = process.env.NODE_ENV || 'development';
 const config = env === 'development' ? devConfig : prodConfig;
 const bundler = webpack(config);

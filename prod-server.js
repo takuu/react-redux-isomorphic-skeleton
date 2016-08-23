@@ -1,13 +1,11 @@
 import React from 'react';
 import cookieParser from 'cookie-parser';
 import express from 'express';
-var router = express.Router();
 import path from 'path';
 // we'll use this to render our app to an html string
 import { renderToString } from 'react-dom/server';
 // and these to match the url to routes and then render
 import { match, RouterContext } from 'react-router';
-import fs from 'fs';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, useQueries } from 'history';
 import compression from 'compression';
@@ -76,7 +74,6 @@ app.get('*', (req, res) => {
         </Provider>);
 
         let initialState = escape(JSON.stringify(store.getState()));
-
         if (getCurrentUrl() === reqUrl) {
           res.send(renderPage(html, initialState));
         } else {
@@ -116,14 +113,11 @@ function renderPage(appHtml, initialState) {
     <link rel="stylesheet" href="/app.css" type="text/css" media="screen" charset="utf-8">
   </head>
     <title>Staty</title>
-   
     <div id="app">${appHtml}</div>
     <script>var __INITIAL_STATE__ =  "${initialState}";</script>
     <script src="/bundle.js"></script>
    `
 }
-
-
 
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {
